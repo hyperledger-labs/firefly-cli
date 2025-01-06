@@ -334,6 +334,7 @@ func init() {
 	initCmd.PersistentFlags().StringArrayVar(&initOptions.OrgNames, "org-name", []string{}, "Organization name")
 	initCmd.PersistentFlags().StringArrayVar(&initOptions.NodeNames, "node-name", []string{}, "Node name")
 	initCmd.PersistentFlags().BoolVar(&initOptions.RemoteNodeDeploy, "remote-node-deploy", false, "Enable or disable deployment of FireFly contracts on remote nodes")
-	initCmd.PersistentFlags().StringToStringVar(&initOptions.EnvironmentVars, "environment-vars", map[string]string{}, "Common environment variables to set on all containers in FireFly stack")
+	initCmd.PersistentFlags().StringToStringVar(&initOptions.EnvironmentVars, "environment-vars", map[string]string{}, "Common environment variables to set on all containers in FireFly stack") 
+	initCmd.Flags().StringVar(&initOptions.FromBlock, "from-block", "0","For multiparty networks only: specify the starting block for event processing (default: 0)")
 	rootCmd.AddCommand(initCmd)
 }

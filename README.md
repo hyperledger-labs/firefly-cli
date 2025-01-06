@@ -56,6 +56,27 @@ go install github.com/hyperledger/firefly-cli/ff@latest
 $ ff init <stack_name>
 ```
 
+### Stack Initialization Options
+
+When initializing a new stack, you can configure various options including:
+
+```
+--from-block      For multiparty networks only: specify the starting block for event processing. 
+                  Use 'newest' for latest block, or a specific block number (default: "0")
+```
+
+Examples:
+```
+# Initialize with default settings (starts from block 0)
+ff init mystack
+
+# Initialize starting from the latest block
+ff init mystack --from-block newest
+
+# Initialize starting from a specific block number
+ff init mystack --from-block 1234567
+```
+
 ## Start a stack
 
 ```

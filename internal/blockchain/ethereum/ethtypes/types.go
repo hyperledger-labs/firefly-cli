@@ -19,7 +19,11 @@ package ethtypes
 type CompiledContracts struct {
 	Contracts map[string]*CompiledContract `json:"contracts"`
 }
-
+// StartOptions holds the options for starting Firefly CLI
+type StartOptions struct {
+	NoRollback bool
+	FirstEvent string // "0", "newest", or a specific block number
+}
 type CompiledContract struct {
 	Name     string      `json:"name"`
 	ABI      interface{} `json:"abi"`
