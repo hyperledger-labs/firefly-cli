@@ -92,6 +92,14 @@ func initCommon(args []string) error {
 		return err
 	}
 
+	if err := validateRemoteNodeVsBlockChainNodeFlags(initOptions.RemoteNodeURL, initOptions.BlockchainNodeProvider); err != nil {
+		return err
+	}
+
+	if err := validateRemoteNodeDeployVsContractAddressFlags(initOptions.RemoteNodeDeploy, initOptions.ContractAddress); err != nil {
+		return err
+	}
+
 	fmt.Println("initializing new FireFly stack...")
 
 	if len(args) > 0 {
@@ -256,6 +264,20 @@ func validatePrivateTransactionManagerBlockchainConnectorCombination(privateTran
 		if !blockchainConnector.Equals(types.BlockchainConnectorEthconnect) {
 			return errors.New("currently only Ethconnect blockchain connector is supported with a private transaction manager")
 		}
+	}
+	return nil
+}
+
+func validateRemoteNodeVsBlockChainNodeFlags(remoteNodeUrl, blockchainNodePorvider string) error {
+	if len(remoteNodeUrl) != 0 && blockchainNodePorvider != "geth" {
+		return errors.New("both flags `remote-node-url` and `blockchain-node` can't be specified")
+	}
+	return nil
+}
+
+func validateRemoteNodeDeployVsContractAddressFlags(remoteNodeDeploy bool, contractAddress string) error {
+	if remoteNodeDeploy && len(contractAddress) != 0 {
+		return errors.New("both flags `contract-address` and `remote-node-deploy` can't be specified")
 	}
 	return nil
 }
